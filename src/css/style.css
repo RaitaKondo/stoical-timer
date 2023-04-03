@@ -1,5 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button:hover {
+  cursor: pointer;
+  transition: background-image 0.5s;
+}
+button:active {
+  transform: translateX(2px) translateY(2px);
+}
+
 body {
-  background-color: red;
+  background: linear-gradient(lightpink, CornflowerBlue);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  background-color: cornsilk;
+  display: flex;
+  border-radius: 10px;
+  position: relative;
+}
+
+.index-card {
+  background-color: #fff;
+  border: solid gray 1px;
+  border-radius: 5px;
+  padding: 3px;
 }
 
 /*# sourceMappingURL=style.css.map */
