@@ -9,11 +9,33 @@ function App() {
   // const [activePage, setActivePage] = React.useState(true);
   // const [achievePage, setAchievePage] = React.useState(false);
   // const [setPage, setSetPage] = React.useState(false);
+
+  const [items, setItems] = React.useState([]);
+  const [adding, setAdding] = React.useState({});
+
   const [page, setPage] = React.useState({
     activePage: true,
     achievePage: false,
     setPage: false,
   });
+
+  const [value, setValue] = React.useState({
+    subject: "",
+    hours: 0,
+    minutes: 0,
+  });
+  console.log(items, value);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setValue((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
 
   const pageHandler = (e) => {
     const target = e.target.value;
@@ -28,6 +50,18 @@ function App() {
       }
     }
     setPage(newPages);
+  };
+
+  const addItem = (e) => {
+    e.preventDefault();
+    setItems((prev) => {
+      return [...prev, value];
+    });
+    setValue({
+      subject: "",
+      hours: 0,
+      minutes: 0,
+    });
   };
 
   return (
@@ -54,7 +88,12 @@ function App() {
         ) : page.achievePage === true ? (
           <Achieves />
         ) : page.setPage === true ? (
-          <Set />
+          <Set
+            items={items}
+            addItem={addItem}
+            handleChange={handleChange}
+            value={value}
+          />
         ) : null}
       </div>
     </div>

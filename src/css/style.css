@@ -34,4 +34,9 @@ body {
   padding: 3px;
 }
 
+.adding-form {
+  display: flex;
+  flex-direction: row;
+}
+
 /*# sourceMappingURL=style.css.map */
