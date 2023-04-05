@@ -2,6 +2,7 @@ import React from "react";
 import { Active } from "./components/Active";
 import Achieves from "./components/Achieves";
 import Set from "./components/Set";
+import { nanoid } from "nanoid";
 
 function App() {
   //---- useState for contents choice and make onClick event handler
@@ -19,11 +20,7 @@ function App() {
     setPage: false,
   });
 
-  const [value, setValue] = React.useState({
-    subject: "",
-    hours: 0,
-    minutes: 0,
-  });
+  const [value, setValue] = React.useState(valueResetter());
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,33 +48,48 @@ function App() {
     setPage(newPages);
   };
 
+  console.log(items);
   const addItem = (e) => {
+    console.log(value);
     e.preventDefault();
     setItems((prev) => {
       return [...prev, value];
     });
-    setValue({
+    setValue(valueResetter());
+  };
+
+  function valueResetter() {
+    const nid = nanoid();
+    return {
       subject: "",
       hours: 0,
       minutes: 0,
-    });
+      id: nid,
+    };
+  }
+
+  const deleteItem = (e) => {
+    // e.preventDefault()
+    console.log(e.target);
   };
+
+  const startItem = () => {};
 
   const itemCardsGenerator = (list) => {
     let button;
 
     if (page.setPage) {
-      button = <button>delete</button>;
+      button = <button onClick={(e) => deleteItem(e)}>delete</button>;
     }
     if (page.activePage) {
       button = <button>start</button>;
     }
     const itemCards = [];
-    list.map((i) => {
+    list.map((i, index) => {
       itemCards.push(
-        <div className="item-card">
+        <div key={index} className="item-card">
           <h3>
-            {i.subject}: {i.hours}h {i.minutes}min
+            {i.subject}: {i.hours}h {i.minutes}min {i.id}
           </h3>
           {button}
         </div>
