@@ -48,9 +48,7 @@ function App() {
     setPage(newPages);
   };
 
-  console.log(items);
   const addItem = (e) => {
-    console.log(value);
     e.preventDefault();
     setItems((prev) => {
       return [...prev, value];
@@ -69,9 +67,14 @@ function App() {
   }
 
   const deleteItem = (e) => {
-    // e.preventDefault()
-    console.log(e.target);
+    const theId = e.target.parentElement.id;
+    const newItems = items.map((i) => {
+      return i.id === theId ? null : i;
+    });
+    setItems(newItems.filter(Boolean));
   };
+
+  //work on startItem feature!
 
   const startItem = () => {};
 
@@ -87,9 +90,9 @@ function App() {
     const itemCards = [];
     list.map((i, index) => {
       itemCards.push(
-        <div key={index} className="item-card">
+        <div key={index} id={i.id} className="item-card">
           <h3>
-            {i.subject}: {i.hours}h {i.minutes}min {i.id}
+            {i.subject}: {i.hours}h {i.minutes}min
           </h3>
           {button}
         </div>
