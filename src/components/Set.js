@@ -1,6 +1,6 @@
 import React from "react";
 
-const Set = ({ items, addItem, handleChange, value }) => {
+const Set = ({ itemCards, addItem, handleChange, value }) => {
   return (
     <div className="set">
       <div className="adding">
@@ -35,6 +35,8 @@ const Set = ({ items, addItem, handleChange, value }) => {
           <p>minutes</p>
         </form>
       </div>
+
+      <div className="item-card-container">{itemCards}</div>
     </div>
   );
 };

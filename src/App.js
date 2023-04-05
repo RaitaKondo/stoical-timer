@@ -24,7 +24,6 @@ function App() {
     hours: 0,
     minutes: 0,
   });
-  console.log(items, value);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,6 +63,31 @@ function App() {
     });
   };
 
+  const itemCardsGenerator = (list) => {
+    let button;
+
+    if (page.setPage) {
+      button = <button>delete</button>;
+    }
+    if (page.activePage) {
+      button = <button>start</button>;
+    }
+    const itemCards = [];
+    list.map((i) => {
+      itemCards.push(
+        <div className="item-card">
+          <h3>
+            {i.subject}: {i.hours}h {i.minutes}min
+          </h3>
+          {button}
+        </div>
+      );
+    });
+    return itemCards;
+  };
+
+  const itemCards = itemCardsGenerator(items);
+
   return (
     <div className="App">
       <h1>here comes the comps</h1>
@@ -84,12 +108,12 @@ function App() {
       </div>
       <div className="main-container">
         {page.activePage === true ? (
-          <Active />
+          <Active items={items} itemCards={itemCards} />
         ) : page.achievePage === true ? (
           <Achieves />
         ) : page.setPage === true ? (
           <Set
-            items={items}
+            itemCards={itemCards}
             addItem={addItem}
             handleChange={handleChange}
             value={value}
